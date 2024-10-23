@@ -14,4 +14,5 @@
         "views/sale_order_views.xml",
         "views/account_move_views.xml",
     ],
+    'post_init_hook': '_post_init_sale_partner_source',
 }
