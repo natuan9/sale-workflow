@@ -1,0 +1,1 @@
+This module provides a more integrated way to classify partners using Odoo’s native **utm.source** model, as opposed to introducing a custom classification model. The **utm.source** field (`source_id`) is added to the **res.partner** form, allowing businesses to track the source of partners, such as marketing campaigns, referrals, or other sources.

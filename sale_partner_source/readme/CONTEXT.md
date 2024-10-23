@@ -1,0 +1,1 @@
+Odoo already provides the ability to track the origin of leads or customers through Source (`utm.source`). This module allows for better classification and tracking of marketing campaigns and the sources from which customers are acquired.
