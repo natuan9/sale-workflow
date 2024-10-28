@@ -33,6 +33,32 @@ def migrate_partner_source_id(env):
     """)
 
 
+def migrate_sale_order(env):
+    env.cr.execute("""
+        UPDATE sale_order so
+        SET source_id = (
+            SELECT us.id
+            FROM utm_source us
+            JOIN res_partner rs ON us.id = rs.source_id
+            WHERE rs.id = so.partner_id
+        )
+        WHERE so.source_id IS NULL;
+    """)
+
+
+def migrate_invoice(env):
+    env.cr.execute("""
+        UPDATE account_move am
+        SET source_id = (
+            SELECT us.id
+            FROM utm_source us
+            JOIN res_partner rs ON us.id = rs.source_id
+            WHERE rs.id = am.partner_id
+        )
+        WHERE am.source_id IS NULL;
+    """)
+
+
 def _post_init_sale_partner_source(env):
     if not env["ir.module.module"].search(
         [("name", "=", "gts_partner_category")]
@@ -43,5 +69,7 @@ def _post_init_sale_partner_source(env):
 
     if util.column_exists(env.cr, "res_partner", "group_category_id"):
         migrate_partner_source_id(env)
+        migrate_sale_order(env)
+        migrate_invoice(env)
 
     util.remove_module(env.cr, "gts_partner_category")
