@@ -1,0 +1,2 @@
+odoo-addon-product_set @ git+https://github.com/OCA/product-attribute.git@refs/pull/1758/head#subdirectory=product_set
+odoo-addon-sale_product_set @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3386/head#subdirectory=sale_product_set
